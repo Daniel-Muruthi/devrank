@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="vh-100 d-flex align-items-center justify-content-center">
+        <form method="post">
+            {% csrf_token %}
+            <div class="card">
+                <div>
+                    <h1>DELETE POST</h1>
+                    <h2>Are you sure you want to delete the post?</h2>
+                </div>
+                <div>
+                    <button class="btn btn-danger" type="submit">Confirm Delete</button>
+                    <a class="btn mx-3 btn-success" href="{% url 'cloneapp:findpost' object.id%}">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
