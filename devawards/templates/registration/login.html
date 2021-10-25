@@ -1,0 +1,33 @@
+{% extends "registration/base.html"%}
+{%load bootstrap5%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="vh-100 d-flex align-items-center justify-content-center">
+        <div class="row">
+            <div card="col-sm-12">
+                {%if messages%}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {%endif%}
+                {% if emaillogin_form.errors %}
+                    <p> Password or Username is incorrect </p>
+                {% endif %}
+                <div class="card p-4">
+                    <h1 class="text-center", style="font-family: 'Cookie', cursive; font-size:xx-large !important;">Instagram</h1>
+                    <form method="post" action="{%url 'cloneapp:emaillogin' %}">
+                        {% csrf_token%}
+                        {%bootstrap_form emaillogin_form%}
+                        <button class="btn btn-primary my-1" style="width:100%" type="submit" Value="Login">Login</button>
+                    </form>
+                    <p class="">Don't have an account? <a href="{%url 'cloneapp:emailsignup'%}">Create an account</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

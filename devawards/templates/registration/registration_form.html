@@ -1,0 +1,49 @@
+{% extends "registration/base.html"%}
+{%load bootstrap5%}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-4"></div>
+    <div class="vh-100 d-flex align-items-center justify-content-center">
+      <div class="col-md-4 card p-2">
+        {% if form.errors %}
+          <p> Some Information Might be Incorrect </p>
+        {% endif %}
+        <div class="panel panel-default">
+  
+          <div class="panel-heading">
+            <h1 class="text-center" style="font-family: 'Cookie', cursive; font-size:xx-large !important;">Instagram</h1>
+            <div>
+              <p class="text-center">
+                Sign up to see photos and videos from your friends.
+              </p>
+            </div>
+          </div>
+          <div class="panel-body">
+  
+            <form  action="{%url 'cloneapp:emailsignup' %}" method="post">
+              {% csrf_token %}
+              {%bootstrap_form signup_form%}
+              <!-- {{signup_form|crispy}} -->
+              <div class="form-group text-center my-1"  >
+                <input type="submit" class="btn btn-primary" value="SignUp"style="width:100%">
+              </div>
+              <input type="hidden" name="next" value="{{next}}">
+  
+            </form>
+            
+          </div>
+        {{signup_form.errors}}
+        </div>
+        
+        <p class="text-center">Already have an account? <a href="{%url 'cloneapp:emaillogin'%}">Log into your account</a></p>
+      </div>
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+{% endblock %}
