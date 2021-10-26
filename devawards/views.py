@@ -45,7 +45,7 @@ def  userhome(request):
     else:
         form =NewsLetterForm()
         c_form = CommentsForm(request.POST)
-    return render(request, 'index.html', { "NLform":form, 'form':c_form})
+    return render(request, 'index.html', {"posts":posts, "NLform":form, 'form':c_form})
 
 
 def signup(request):
@@ -136,8 +136,10 @@ class CreateProjectView(LoginRequiredMixin, CreateView):
     model = Project
     template_name = 'createpost.html'
     slug_field = "slug"
-    fields =['userpic', 'description','livelink']
+    fields =['userpic', 'title', 'description','livelink']
+    
 
+    form= UserProjectForm
     def form_valid(self, form):
         form.instance.name = self.request.user
         return super().form_valid(form)
@@ -151,5 +153,6 @@ class CreateProjectView(LoginRequiredMixin, CreateView):
             form.save()
 
             return redirect(reverse("post", kwargs={"commentform":form, 'slug':post.slug}))
-
+    def get_success_url(self):
+        return reverse('index')
 

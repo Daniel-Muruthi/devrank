@@ -1,5 +1,24 @@
 {%extends 'base.html'%}
+{% block content %}
 
-{% for project in projectdata %}
-<h1>{{projectdata.name}}</h1>
-{% endfor %}
+<h1>{{project.title}}</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 d-flex" style="flex-wrap:wrap !important; justify-content:space-around;">
+            {% for project in posts %}
+            <div class="card col-sm-3 mx-1 my-2" style="height:650px;">
+                <img src="{{project.userpic.url}}" alt="projectpic">
+                <h1 class="text-center my-2">{{project.title}}</h1>
+                <h4>Description: {{project.description}}</h4>
+                <p>
+                    <a class="btn btn-outline-primary" href="{{project.livelink.url}}">
+                        Click to View ...
+                    </a>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

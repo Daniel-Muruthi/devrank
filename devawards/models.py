@@ -68,17 +68,18 @@ class UserProfile(models.Model):
 
 
 class Project(models.Model):
+    title = models.CharField(null=True, max_length=255)
     name = models.CharField(null=True, max_length=255)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     userpic = CloudinaryField('image')
     description = models.CharField(blank=True,max_length=255)
     livelink = models.URLField()
-    pub_date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
     likes = models.IntegerField(default=0)
     comments = models.TextField(blank=True, max_length=500)
 
     def __str__(self):
-        return self.description
+        return self.title
 
     @classmethod
     def show_projects(cls):
