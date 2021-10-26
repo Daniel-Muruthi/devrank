@@ -19,12 +19,12 @@
                 {% endif %}
                 <div class="card p-4">
                     <h1 class="text-center", style="font-family: 'Cookie', cursive; font-size:xx-large !important;">Instagram</h1>
-                    <form method="post" action="{%url 'cloneapp:emaillogin' %}">
+                    <form method="post" action="{%url 'emaillogin' %}">
                         {% csrf_token%}
                         {%bootstrap_form emaillogin_form%}
                         <button class="btn btn-primary my-1" style="width:100%" type="submit" Value="Login">Login</button>
                     </form>
-                    <p class="">Don't have an account? <a href="{%url 'cloneapp:emailsignup'%}">Create an account</a></p>
+                    <p class="">Don't have an account? <a href="{%url 'emailsignup'%}">Create an account</a></p>
                 </div>
             </div>
         </div>

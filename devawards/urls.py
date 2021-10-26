@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .views import UserProfile, EditProfile
 
 
-app_name = 'cloneapp'
+
 urlpatterns=[
     url(r'^$', views.landing, name='landingpage'),
     path("index/", views.userhome, name='index'),
