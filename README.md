@@ -7,7 +7,7 @@
 
 DevRank django web application is a site that offers you a platform to have your projects be rated by real life developers from all over the world. Signup, create, comment and rate fellow developer projects.
 
-# Log In To Admin To Add
+# Log In To Admin
 Log into the admin panel
 Username: Muruthi, 
 Password: adino1995
