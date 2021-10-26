@@ -5,72 +5,10 @@
 {%load static%}
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
 {% endblock %}
-<title></title>
 {% endblock %}
-{% load crispy_forms_tags %}
 {% block content %}
-</head>
-<body id="bg" style="background-image: url('{% static "images/bg2.jpg" %}'); background-repeat:no-repeat; background-size:cover;">
-<!-- <body> -->
-    <div class="container">
-        <div class="row col-sm-12">
-            <div class="vh-100 d-flex align-items-center justify-content-around">
-                <div class="container">
-                    <div class="row">
-                  
-                      <div class="col-md-6"></div>
-                      <div class="vh-100 d-flex align-items-center justify-content-center">
-                        <div class="col-md-6 card p-2">
-                          {% if form.errors %}
-                            <p> Some Information Might be Incorrect </p>
-                          {% endif %}
-                          <div class="panel panel-default">
-                    
-                            <div class="panel-heading">
-                              <h1 class="text-center" style="font-family: 'Cookie', cursive; font-size:xx-large !important;">DevRank</h1>
-                              <div>
-                                <p class="text-center">
-                                  Sign up to see photos and videos from your friends.
-                                </p>
-                              </div>
-                            </div>
-                            <div class="panel-body">
-                    
-                              <form  action="" method="post">
-                                {% csrf_token %}
-                                {%bootstrap_form signup_form%}
-                                <!-- {{signup_form|crispy}} -->
-                                <div class="form-group text-center my-1" >
-                                  <input type="submit" class="btn btn-primary" value="SignUp" style="width:100%">
-                                </div>
-                                <input type="hidden" name="next" value="{{next}}">
-                    
-                              </form>
-                              
-                            </div>
-                          {{signup_form.errors}}
-                          </div>
-                          
-                          <p class="text-center">Already have an account? <a href="{%url 'emaillogin'%}">Sign into your account</a></p>
-                        </div>
-                      </div>
-                      <!-- empty div -->
-                      <div class="col-md-4"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 {% endblock %}

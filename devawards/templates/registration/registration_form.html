@@ -14,16 +14,16 @@
         <div class="panel panel-default">
   
           <div class="panel-heading">
-            <h1 class="text-center" style="font-family: 'Cookie', cursive; font-size:xx-large !important;">Instagram</h1>
+            <h1 class="text-center" style="font-family: 'Cookie', cursive; font-size:xx-large !important;">DevRank</h1>
             <div>
               <p class="text-center">
-                Sign up to see photos and videos from your friends.
+                Sign up and upload your project for communal rating.
               </p>
             </div>
           </div>
           <div class="panel-body">
   
-            <form  action="{%url 'cloneapp:emailsignup' %}" method="post">
+            <form  action="{%url 'emailsignup' %}" method="post">
               {% csrf_token %}
               {%bootstrap_form signup_form%}
               <!-- {{signup_form|crispy}} -->
@@ -38,7 +38,7 @@
         {{signup_form.errors}}
         </div>
         
-        <p class="text-center">Already have an account? <a href="{%url 'cloneapp:emaillogin'%}">Log into your account</a></p>
+        <p class="text-center">Already have an account? <a href="{%url 'emaillogin'%}">Log into your account</a></p>
       </div>
     </div>
     <!-- empty div -->

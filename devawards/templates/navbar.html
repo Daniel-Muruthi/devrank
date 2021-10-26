@@ -1,56 +1,79 @@
 {%block navbar%}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-    </head>
-<body>
-    <div class="navbar navbar-default navbar-static-top " role="navigation">
-        <div class="container-fluid d-inline ">
-            <a href="/" class="header_logo navbar-brand mx-3 mt-0">Pitch</a>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav d-inline">
-                    <li id="home" class=" mx-3 d-block">
-                        <a href="/">Home</a>
-                    </li>
-                    <li id="about" class=" mx-3 d-block">
-                        <a href="#">About</a>
-                    </li>
-                    <li id="contacts" class=" mx-3 d-block">
-                        <a href="#">Contacts</a>
-                    </li>
-                </ul>
-                <div class="navbar navbar-nav navbar-right signlog d-inline">
-                    {% if current_user.is_authenticated %}
-                    <h4 class="d-inline"> </h4>
-                    <img src="" alt="user ppic" height="50px" width="50px" class="d-inline">
-                    <div class="my-auto mx-3 signout d-inline">
-                        <a href="" class="btn btn-primary ">Create New Pitch</a>
-                    </div>
-                    <div class="my-auto mx-3 signout d-inline">
-                        <a href="{% url 'logout' %}" class="btn btn-primary ">Sign out</a>
-                    </div>
-                    {% else %}
-                    <div class="my-auto mx-3 signup d-inline">
-                        <a href="{% url 'emailsignup' %}" class="btn btn-success ">Sign Up</a>
-                    </div>
-                    <div class="my-auto mx-3 login d-inline">
-                        <a href="{% url 'emaillogin' %}" class="btn btn-primary">
-                            Log In
+<div class="navbar navbar-default navbar-static-top" role="navigation" style="border:1px solid white; box-shadow:0px 0px 4px 1px grey; position:relative">
+    <div class="container-fluid">
+        <a class="navbar-brand navbar-logo" href="{%url 'landingpage'%}" style="font-family: 'Cookie', cursive; font-size:xx-large !important; text-decoration: none;">Devrank
+        </a>
+        {% if current_user.is_authenticated %}
+        <div class="d-inline mx-auto">
+            <form class="navbar-form" name="search" role="search" action="">
+              {% csrf_token %}
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" name="searchcategory">
+                  <div class="input-group-btn">
+                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                  </div>
+              </div>
+            </form>
+        </div>
+        
+        <div class="navbar-expand d-inline" >
+            <ul class="nav navbar-nav d-flex" >
+                <li class="mx-3 d-block"><a href="{%url 'index'%}" style="text-decoration: none;">Home</a></li>
+                <li class="mx-3 d-block"><a href="{%url 'index'%}" style="text-decoration: none;">Feed</a></li>
+                <li class="mx-3 d-block"><a href="" class="btn btn-primary" style="text-decoration: none;">New Post</a></li>
+            </ul>
+        </div>
+        <div class="navbar navbar-nav navbar-right d-inline">
+            <div class="d-flex">
+                <div class="nav-item dropdown mx-3" >
+                    <a href=""  class="nav-link dropdown-toggle user-action" data-bs-toggle="dropdown">
+                        <img src="{{user.userprofile.userpic.url}}" class="avatar" alt="Avatar" style="height:50px; width:50px; border-radius: 50%;">
+                        <h5 class="d-inline">{{ user.username }} </h5>
+                        <!-- <b class="caret"></b> -->
+                    </a>
+                    <div class="dropdown-menu" style="position:absolute !important;">
+                        <a href="{%url 'profile'%}" class="dropdown-item">
+                            <i class="fa fa-user-o"></i>
+                            Profile
+                        </a>
+                        <a href="" class="dropdown-item">
+                            <i class="fa fa-envelope"></i>
+                            Messages
+                        </a>
+                        <div class="divider dropdown-divider"></div>
+                        <a href="{%url 'logout'%}" class="dropdown-item">
+                            <i class="fa fa-sign-out"></i>
+                            Logout
                         </a>
                     </div>
-                    {% endif %}
+                    <div class="dropdown-menu" style="position:absolute !important;">
+                        <a href="{%url 'emaillogin' %}" class="dropdown-item">
+                            <i class="fa fa-envelope"></i>
+                            Log In
+                        </a>
+                        <div class="divider dropdown-divider"></div>
+                        <a href="{%url 'emailsignup'%}" class="dropdown-item">
+                            <i class="fa fa-sign-out"></i>
+                            Sign Up
+                        </a>
+                    </div> 
                 </div>
             </div>
         </div>
+        {% else %}
+        <div class="navbar navbar-nav navbar-right d-inline">
+            <div class="my-auto mx-3 signup d-inline">
+                <a href="{%url 'emailsignup'%}" class="btn btn-success ">Sign Up</a>
+            </div>
+            <div class="my-auto mx-3 login d-inline">
+                <a href="{%url 'emaillogin'%}" class="btn btn-primary">
+                    Log In
+                </a>
+            </div>
+        </div>
+        {% endif %}
     </div>
-</body>
-</html>
-{% endblock %}
+</div>
+{%endblock%}
 {%block content%}
 {%endblock%}
