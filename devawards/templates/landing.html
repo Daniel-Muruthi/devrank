@@ -1,3 +1,4 @@
+{%extends 'base.html'%}
 {% block head %}
 {%load bootstrap5%}
 {% block styles %}
@@ -8,7 +9,6 @@
 <html lang="en">
 <head>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -23,44 +23,6 @@
     <div class="container">
         <div class="row col-sm-12">
             <div class="vh-100 d-flex align-items-center justify-content-around">
-                <div class="col-sm-3" style="border:1px solid;" >
-                    <div id="carouselDarkMode" class="carousel slide carousel-fade carousel-dark pointer-event w-80 mx-auto" data-bs-ride="carousel" style="border:1px solid white; box-shadow:0px 0px 4px 1px grey;">
-                        <!-- Indicators --> 
-                        <div class="carousel-indicators my-3">
-                            <button data-bs-target="#carouselDarkMode" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button data-bs-target="#carouselDarkMode" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button data-bs-target="#carouselDarkMode" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button data-bs-target="#carouselDarkMode" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                            <button data-bs-target="#carouselDarkMode" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item overlay active">
-                                <img src="https://www.instagram.com/static/images/homepage/screenshot1.jpg/d6bf0c928b5a.jpg" class="d-block w-100 pic" alt="different times of the day" height="600px" width="fit-content">
-                            </div>
-                            <div class="carousel-item overlay">
-                                <img src="https://www.instagram.com/static/images/homepage/screenshot2.jpg/6f03eb85463c.jpg" class="d-block w-100 pic" alt="different times of the day" height="600px" width="fit-content">
-                            </div>
-                            <div class="carousel-item overlay">
-                                <img src="https://www.instagram.com/static/images/homepage/screenshot3.jpg/f0c687aa6ec2.jpg" class="d-block w-100 pic" alt="different times of the day" height="600px">
-                            </div>
-                            <div class="carousel-item overlay">
-                                <img src="https://www.instagram.com/static/images/homepage/screenshot4.jpg/842fe5699220.jpg" class="d-block w-100 pic" alt="different times of the day" height="600px">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://www.instagram.com/static/images/homepage/screenshot5.jpg/0a2d3016f375.jpg" class="d-block w-100 pic" alt="different times of the day" height="600px">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDarkMode" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselDarkMode" data-bs-slide="prev">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
                 <div class="container">
                     <div class="row">
                   
@@ -73,7 +35,7 @@
                           <div class="panel panel-default">
                     
                             <div class="panel-heading">
-                              <h1 class="text-center" style="font-family: 'Cookie', cursive; font-size:xx-large !important;">Instagram</h1>
+                              <h1 class="text-center" style="font-family: 'Cookie', cursive; font-size:xx-large !important;">DevRank</h1>
                               <div>
                                 <p class="text-center">
                                   Sign up to see photos and videos from your friends.
@@ -82,7 +44,7 @@
                             </div>
                             <div class="panel-body">
                     
-                              <form  action="{%url 'cloneapp:emailsignup' %}" method="post">
+                              <form  action="" method="post">
                                 {% csrf_token %}
                                 {%bootstrap_form signup_form%}
                                 <!-- {{signup_form|crispy}} -->
