@@ -65,3 +65,35 @@ class UserProfile(models.Model):
     def getProfileByName(cls, username):
         uprofile = cls.objects.filter(username=username)
         return uprofile
+
+
+class Project(models.Model):
+    name = models.CharField(null=True, max_length=255)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    userpic = CloudinaryField('image')
+    description = models.CharField(blank=True,max_length=255)
+    livelink = models.URLField()
+
+    def __str__(self):
+        return self.description
+
+    @classmethod
+    def show_projects(cls):
+        projects = cls.objects.all()
+        return projects
+
+    @classmethod
+    def getprojectbyid(cls, id):
+        projects = cls.objects.filter(id=id)
+        return projects
+
+    @classmethod
+    def getprojectbytitle(cls, searchtitle):
+        getproject = cls.objects.filter(title=searchtitle)
+        return getproject
+
+class ProjectRating(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    project = models.OneToOneField(Project, on_delete=models.CASCADE, null=True)
+    rating = models.IntegerField()
