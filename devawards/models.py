@@ -73,6 +73,9 @@ class Project(models.Model):
     userpic = CloudinaryField('image')
     description = models.CharField(blank=True,max_length=255)
     livelink = models.URLField()
+    pub_date = models.DateTimeField(auto_now_add=True)
+    likes = models.IntegerField(default=0)
+    comments = models.TextField(blank=True, max_length=500)
 
     def __str__(self):
         return self.description

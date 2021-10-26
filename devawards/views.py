@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from .forms import SignUpForm, NewsLetterForm, CommentsForm,  UserProfileUpdateForm
+from .forms import SignUpForm, NewsLetterForm, CommentsForm,  UserProfileUpdateForm, UserProjectForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import  Location, UserProfile, Subscriber, Project
 from django.http import HttpResponseRedirect, Http404, HttpResponse
@@ -28,7 +28,7 @@ def landing(request):
 
 @login_required(login_url='/emaillogin/')
 def  userhome(request):
-    # posts = Post.show_posts().order_by('-pub_date')
+    posts = Project.show_projects().order_by('-pub_date')
 
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
