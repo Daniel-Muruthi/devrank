@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, NewsLetterForm, CommentsForm,  UserProfileUpdateForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .models import  Location, UserProfile
+from .models import  Location, UserProfile, Subscriber
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, FormView,UpdateView, CreateView, DeleteView
@@ -26,9 +26,10 @@ def landing(request):
     return render(request, 'landing.html', context={"signup_form":form})
 
 
-@login_required(login_url='/accounts/emaillogin/')
+@login_required(login_url='/emaillogin/')
 def  userhome(request):
     # posts = Post.show_posts().order_by('-pub_date')
+
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
         c_form = CommentsForm(request.POST)
@@ -74,7 +75,7 @@ def userlogin(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect('cloneapp:index')
+                return redirect('index')
             else:
                 messages.error(request, "Invalid username or password")
                 return render(request, 'registration/registration_form.html')

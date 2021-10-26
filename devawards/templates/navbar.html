@@ -3,12 +3,12 @@
     <div class="container-fluid">
         <a class="navbar-brand navbar-logo" href="{%url 'landingpage'%}" style="font-family: 'Cookie', cursive; font-size:xx-large !important; text-decoration: none;">Devrank
         </a>
-        {% if current_user.is_authenticated %}
+        {% if user.is_authenticated %}
         <div class="d-inline mx-auto">
             <form class="navbar-form" name="search" role="search" action="">
               {% csrf_token %}
               <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" name="searchcategory">
+                  <input type="text" class="form-control" placeholder="Search Username" name="searchcategory">
                   <div class="input-group-btn">
                       <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                   </div>

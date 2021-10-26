@@ -58,8 +58,10 @@ class UserProfile(models.Model):
     userpic = CloudinaryField('image')
     gender = models.CharField(max_length=11, choices=GENDER_CHOICES, default='Male')
 
-
-
-
     def __str__(self):
         return self.user.username
+
+    @classmethod
+    def getProfileByName(cls, username):
+        uprofile = cls.objects.filter(username=username)
+        return uprofile
