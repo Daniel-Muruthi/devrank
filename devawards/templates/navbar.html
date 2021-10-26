@@ -3,7 +3,6 @@
     <div class="container-fluid">
         <a class="navbar-brand navbar-logo" href="{%url 'landingpage'%}" style="font-family: 'Cookie', cursive; font-size:xx-large !important; text-decoration: none;">Devrank
         </a>
-        {% if user.is_authenticated %}
         <div class="d-inline mx-auto">
             <form class="navbar-form" name="search" role="search" action="">
               {% csrf_token %}
@@ -20,7 +19,7 @@
             <ul class="nav navbar-nav d-flex" >
                 <li class="mx-3 d-block"><a href="{%url 'index'%}" style="text-decoration: none;">Home</a></li>
                 <li class="mx-3 d-block"><a href="{%url 'index'%}" style="text-decoration: none;">Feed</a></li>
-                <li class="mx-3 d-block"><a href="" class="btn btn-primary" style="text-decoration: none;">New Post</a></li>
+                <li class="mx-3 d-block"><a href="{%url 'newerpost'%}" class="btn btn-primary" style="text-decoration: none;">Add Project</a></li>
             </ul>
         </div>
         <div class="navbar navbar-nav navbar-right d-inline">
@@ -60,18 +59,6 @@
                 </div>
             </div>
         </div>
-        {% else %}
-        <div class="navbar navbar-nav navbar-right d-inline">
-            <div class="my-auto mx-3 signup d-inline">
-                <a href="{%url 'emailsignup'%}" class="btn btn-success ">Sign Up</a>
-            </div>
-            <div class="my-auto mx-3 login d-inline">
-                <a href="{%url 'emaillogin'%}" class="btn btn-primary">
-                    Log In
-                </a>
-            </div>
-        </div>
-        {% endif %}
     </div>
 </div>
 {%endblock%}

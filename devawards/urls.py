@@ -18,6 +18,7 @@ urlpatterns=[
     url( r'^emailsignup/$',views.signup, name="emailsignup"),
     path('profile/', views.UserProfile, name='profile' ),
     path ('profile/update/', views.EditProfile, name="update"),
+    path ('post/new/', views.CreateProjectView.as_view(), name="newerpost"),
 
 ]
 

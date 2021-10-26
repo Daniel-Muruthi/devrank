@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, NewsLetterForm, CommentsForm,  UserProfileUpdateForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .models import  Location, UserProfile, Subscriber
+from .models import  Location, UserProfile, Subscriber, Project
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, FormView,UpdateView, CreateView, DeleteView
@@ -130,5 +130,26 @@ def EditProfile(request):
         'profileform': profileform
     }
     return render(request, 'profileedit.html', context)
+
+
+class CreateProjectView(LoginRequiredMixin, CreateView):
+    model = Project
+    template_name = 'createpost.html'
+    slug_field = "slug"
+    fields =['userpic', 'description','livelink']
+
+    def form_valid(self, form):
+        form.instance.name = self.request.user
+        return super().form_valid(form)
+
+    def projectpost(self, request, *args, **kwargs):
+        form = UserProjectForm(request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+
+            return redirect(reverse("post", kwargs={"commentform":form, 'slug':post.slug}))
 
 

@@ -1,15 +1,28 @@
-{%extends 'base.html'%}
-{% block head %}
-{%load bootstrap5%}
-{% block styles %}
-{%load static%}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{%block navbar%}
+<div class="navbar navbar-default navbar-static-top" role="navigation" style="border:1px solid white; box-shadow:0px 0px 4px 1px #808080; position:relative">
+    <div class="container-fluid" style="display:flex;">
+        <a class="navbar-brand navbar-logo" href="{%url 'landingpage'%}" style="font-family: 'Cookie', cursive; font-size:xx-large !important; text-decoration: none;">Devrank
+        </a>
+        <div class="navbar navbar-nav navbar-right d-flex" style="display:flex !important;">
+            <div class="my-auto mx-3 signup">
+                <a href="{%url 'emailsignup'%}" class="btn btn-success ">Sign Up</a>
+            </div>
+            <div class="my-auto mx-3 login">
+                <a href="{%url 'emaillogin'%}" class="btn btn-primary">
+                    Log In
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
 
-
-{% endblock %}
-{% endblock %}
 {% block content %}
+
+{%endblock%}
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-{% endblock %}
+
 {% endblock %}
