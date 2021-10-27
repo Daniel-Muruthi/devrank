@@ -15,7 +15,7 @@
                         <p>Created at: {{object.pub_date}}</p>
                         <div class="card-footer">
                             <div class="d-flex my-1" style="justify-content:space-around;">
-                                <a class="btn btn-outline-success" href="{{object.livelink.url}}">View Deployment</a>
+                                <a class="btn btn-outline-success" href="{{object.livelink}}">View Deployment</a>
                                 <a href="{%url 'delete' object.id%}" class="btn btn-danger ">Delete Post</a>
                             </div>
                         </div>
