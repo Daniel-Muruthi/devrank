@@ -18,7 +18,7 @@
                     <p> Password or Username is incorrect </p>
                 {% endif %}
                 <div class="card p-4">
-                    <h1 class="text-center", style="font-family: 'Cookie', cursive; font-size:xx-large !important;">Instagram</h1>
+                    <h1 class="text-center", style="font-family: 'Cookie', cursive; font-size:xx-large !important;">DevRank</h1>
                     <form method="post" action="{%url 'emaillogin' %}">
                         {% csrf_token%}
                         {%bootstrap_form emaillogin_form%}
