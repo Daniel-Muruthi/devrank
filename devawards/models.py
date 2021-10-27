@@ -59,7 +59,7 @@ class UserProfile(models.Model):
     email = models.CharField(null=True, max_length=255)
     phonenumber = models.IntegerField(null=True)
     bio = models.CharField(blank=True,max_length=255)
-    userpic = CloudinaryField('image', default='default.jpg')
+    userpic = CloudinaryField('image')
     gender = models.CharField(max_length=11, choices=GENDER_CHOICES, default='Male')
 
     def __str__(self):

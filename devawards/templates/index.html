@@ -14,7 +14,7 @@
                         Click to View ...
                     </a>
                 </p>
-                <div class="section">
+                <!-- <div class="section">
                     <div class="">
                         <form method="POST" action="">
                             {% csrf_token %}
@@ -24,11 +24,11 @@
                             <button class="btn btn-primary" type=submit>Comment</button>
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <div>
                     <h2>Comments...</h2>
                     {% if not project.comments.all %}
-                        No Comments Yet...<a href="#">Add One</a>
+                        No Comments Yet...<a href="{%url 'addcomment' project.comments.instance.id%}">Add One</a>
                     {% else %}
                         {% for comment in project.comments.all%}
                             <strong>

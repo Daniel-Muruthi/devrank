@@ -57,7 +57,7 @@ def signup(request):
             # login(request, user)
             user= form.cleaned_data.get('username')
             messages.success(request, f"Registration successfull {user}")
-            return redirect('cloneapp:emaillogin')
+            return redirect('emaillogin')
         else:
             messages.error(request, "Unsuccessful registration. Invalid Information")
             return render(request, "registration/registration_form.html", {"signup_form":form})
@@ -211,6 +211,34 @@ class DeleteProject(LoginRequiredMixin, DeleteView):
         
         return Project.objects.all()
 
+
+class AddCommentView(CreateView):
+    model = Comment
+    template_name = 'addcomment.html'
+    success_url =reverse_lazy('findpost')
+    fields = '__all__'
+
+    form= CommentsForm
+    def form_valid(self, form):
+        form.instance.name = self.request.user
+        return super().form_valid(form)
+
+    def projectpost(self, request, *args, **kwargs):
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            project = self.get_object()
+            form.instance.user = request.user
+            form.instance.projectpost = project
+            form.save()
+
+            return redirect(reverse("project", kwargs={"form":form, 'pk':project.id}))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.form
+        return context
+    def get_success_url(self):
+        return reverse('findpost')
 
 
 

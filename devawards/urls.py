@@ -6,7 +6,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from .views import DeleteProject, UserProfile, EditProfile, FindProjectView, CreateProjectView
+from .views import AddCommentView, DeleteProject, UserProfile, EditProfile, FindProjectView, CreateProjectView
 
 
 
@@ -21,6 +21,7 @@ urlpatterns=[
     path ('project/new/', CreateProjectView.as_view(), name="newerpost"),
     path('project/<int:pk>/', views.FindProjectView.as_view(), name='findpost'),
     path('project/<int:pk>/deletepost/', DeleteProject.as_view(), name='delete'),
+    path('project/new/<int:pk>/addcomment/', AddCommentView.as_view(), name='addcomment'),
 
 ]
 
