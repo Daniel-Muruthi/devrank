@@ -39,12 +39,17 @@ class Comment(models.Model):
 
     objects = models.Manager()
 
-
-
-    def savecomment(self):
-        self.save()
     def __str__(self):
         return self.user.username
+    def get_absolute_url(self):
+        return reverse('addcomment', kwargs={'pk': self.pk})
+
+    @classmethod
+    def show_projects(cls):
+        comments = cls.objects.all()
+        return comments
+    def savecomment(self):
+        self.save()
 
 GENDER_CHOICES = (
    ('M', 'Male'),

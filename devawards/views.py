@@ -218,27 +218,19 @@ class AddCommentView(CreateView):
     success_url =reverse_lazy('findpost')
     fields = '__all__'
 
-    form= CommentsForm
-    def form_valid(self, form):
-        form.instance.name = self.request.user
-        return super().form_valid(form)
+    # def projectpost(self, request, *args, **kwargs):
+    #     form = CommentsForm(request.POST)
+    #     if form.is_valid():
+    #         project = self.get_object()
+    #         form.instance.user = request.user
+    #         form.instance.project = project
+    #         form.save()
 
-    def projectpost(self, request, *args, **kwargs):
-        form = CommentsForm(request.POST)
-        if form.is_valid():
-            project = self.get_object()
-            form.instance.user = request.user
-            form.instance.projectpost = project
-            form.save()
+    #         return redirect(reverse("addcomment", kwargs={"form":form, 'pk':project.id}))
 
-            return redirect(reverse("project", kwargs={"form":form, 'pk':project.id}))
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["form"] = self.form
-        return context
-    def get_success_url(self):
-        return reverse('findpost')
+    # def get_queryset(self):
+        
+    #     return Comment.objects.all()
 
 
 
