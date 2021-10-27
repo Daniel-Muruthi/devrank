@@ -34,13 +34,17 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,)
     comment = models.TextField(null=True)
     date = models.DateField(auto_now_add=True, null=True)
+    project = models.ForeignKey('Project', related_name="comments", on_delete=models.CASCADE, null=True,)
+
+
     objects = models.Manager()
+
 
 
     def savecomment(self):
         self.save()
     def __str__(self):
-        return self.user
+        return self.user.username
 
 GENDER_CHOICES = (
    ('M', 'Male'),
@@ -55,7 +59,7 @@ class UserProfile(models.Model):
     email = models.CharField(null=True, max_length=255)
     phonenumber = models.IntegerField(null=True)
     bio = models.CharField(blank=True,max_length=255)
-    userpic = CloudinaryField('image')
+    userpic = CloudinaryField('image', default='default.jpg')
     gender = models.CharField(max_length=11, choices=GENDER_CHOICES, default='Male')
 
     def __str__(self):
@@ -76,15 +80,18 @@ class Project(models.Model):
     livelink = models.URLField()
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
     likes = models.IntegerField(default=0)
-    comments = models.TextField(blank=True, max_length=500)
 
-    def __str__(self):
-        return self.title
+
+    # objects = models.Manager()
+
+    def get_absolute_url(self):
+        return reverse('findpost', kwargs={'pk': self.pk})
 
     @classmethod
     def show_projects(cls):
         projects = cls.objects.all()
         return projects
+
 
     @classmethod
     def getprojectbyid(cls, id):

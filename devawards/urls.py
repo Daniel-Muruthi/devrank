@@ -6,7 +6,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from .views import UserProfile, EditProfile
+from .views import DeleteProject, UserProfile, EditProfile, FindProjectView, CreateProjectView
 
 
 
@@ -18,7 +18,9 @@ urlpatterns=[
     url( r'^emailsignup/$',views.signup, name="emailsignup"),
     path('profile/', views.UserProfile, name='profile' ),
     path ('profile/update/', views.EditProfile, name="update"),
-    path ('post/new/', views.CreateProjectView.as_view(), name="newerpost"),
+    path ('project/new/', CreateProjectView.as_view(), name="newerpost"),
+    path('project/<int:pk>/', views.FindProjectView.as_view(), name='findpost'),
+    path('project/<int:pk>/deletepost/', DeleteProject.as_view(), name='delete'),
 
 ]
 

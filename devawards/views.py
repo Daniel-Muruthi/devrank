@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, NewsLetterForm, CommentsForm,  UserProfileUpdateForm, UserProjectForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .models import  Location, UserProfile, Subscriber, Project
+from .models import  Location, UserProfile, Subscriber, Project,Comment
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, FormView,UpdateView, CreateView, DeleteView
@@ -120,7 +120,7 @@ def EditProfile(request):
             profileform.save(commit=False)
 
 
-            return redirect('cloneapp:profile')
+            return redirect('profile')
 
         else:
             profileform = UserProfileUpdateForm(instance=request.user.userprofile)
@@ -130,6 +130,45 @@ def EditProfile(request):
         'profileform': profileform
     }
     return render(request, 'profileedit.html', context)
+class FindProjectView(DetailView):
+    model = Project
+    template_name = 'projectfound.html'
+    slug_field = "slug"
+
+    form = CommentsForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def project(self, request, *args, **kwargs):
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            project = self.get_object()
+            form.instance.user = request.user
+            form.instance.project = project
+            form.save()
+
+            return redirect(reverse('project', kwargs={"form":form, 'slug':project.slug}))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.form
+        return context
+    
+    def get_context_data(self, **kwargs):
+        post_comments_count = Comment.objects.all().filter(comment=self.object.id).count()
+        post_comments = Comment.objects.all().filter(comment=self.object.id)
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'form': self.form,
+            'post_comments': post_comments,
+            'post_comments_count': post_comments_count,
+        })
+        return context
+    
+
+
 
 
 class CreateProjectView(LoginRequiredMixin, CreateView):
@@ -146,13 +185,32 @@ class CreateProjectView(LoginRequiredMixin, CreateView):
 
     def projectpost(self, request, *args, **kwargs):
         form = UserProjectForm(request.POST)
-        if form.is_valid():
-            post = self.get_object()
+        c_form = CommentsForm(request.POST)
+        if form.is_valid() and c_form.is_valid():
+            project = self.get_object()
             form.instance.user = request.user
-            form.instance.post = post
+            form.instance.project = project
             form.save()
 
-            return redirect(reverse("post", kwargs={"commentform":form, 'slug':post.slug}))
+            return redirect(reverse("project", kwargs={"projectform":form,"cform":c_form, 'pk':project.id}))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.form
+        return context
     def get_success_url(self):
         return reverse('index')
+
+class DeleteProject(LoginRequiredMixin, DeleteView):
+    model = Project
+    template_name='delete.html'
+    success_url = reverse_lazy('index')
+
+
+    def get_queryset(self):
+        
+        return Project.objects.all()
+
+
+
 

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content%}
+{% load bootstrap5 %}
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row" style="margin:0 !important;">
+                <div class="d-flex" style="flex-wrap:wrap !important; justify-content:space-around;">
+                    <div class="col-sm-7 col-md-7 col-7- card my-3" style="height:fit-content !important; width:80%;">
+                        <img src="{{object.userpic.url}}" alt="image" height="500px">
+                        <h3 class="text-center text-primary">
+                            <p>{{object.title}}</p>
+                        </h3>
+                        <h4>"{{object.description}}"</h4>
+                        <p>Created at: {{object.pub_date}}</p>
+                        <div class="card-footer">
+                            <div class="d-flex my-1" style="justify-content:space-around;">
+                                <a class="btn btn-outline-success" href="{{object.livelink.url}}">View Deployment</a>
+                                <a href="{%url 'delete' object.id%}" class="btn btn-danger ">Delete Post</a>
+                            </div>
+                        </div>
+                        <!-- Comments -->
+                        <div class="Tags gap-xy-2 text-center mt-6">
+                            <div class="">
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                    {{projectform}}
+                                    </div>
+                                    <button class="btn btn-primary">Comment</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div>
+                            <p>{{object.comments}}</p>
+                            <h1>Comments...</h1>
+                            {%if not project.comments.all%}
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
