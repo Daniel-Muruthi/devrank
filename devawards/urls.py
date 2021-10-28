@@ -12,7 +12,7 @@ from .views import AddCommentView, DeleteProject, UserProfile, EditProfile, Find
 
 urlpatterns=[
     url(r'^$', views.landing, name='landingpage'),
-    path("index/<int:pk>/", views.userhome, name='index'),
+    path("index/", views.userhome, name='index'),
     url( r'^emaillogin/$',views.userlogin, name="emaillogin"),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     url( r'^emailsignup/$',views.signup, name="emailsignup"),

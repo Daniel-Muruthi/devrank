@@ -27,10 +27,9 @@ def landing(request):
 
 
 @login_required(login_url='/emaillogin/')
-def  userhome(request, pk, **kwargs):
+def  userhome(request, **kwargs):
     posts = Project.show_projects().order_by('-pub_date')
-    pk=pk
-    likey= get_object_or_404(Project, id=pk)
+    likey= get_object_or_404(Project)
     totallikes= likey.totallikes()
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
@@ -241,7 +240,7 @@ def CommentPost(request, pk):
 def LikeView(request, pk):
     project = get_object_or_404(Project, id=request.POST.get('likeid'))
     project.likes.add(request.user)
-    return HttpResponseRedirect(reverse('index'), args=[str(pk)])
+    return HttpResponseRedirect(reverse('index'), id=pk)
     # form= CommentsForm
     # def form_valid(self, form):
     #     form.instance.name = self.request.user
