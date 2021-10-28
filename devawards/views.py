@@ -212,11 +212,50 @@ class DeleteProject(LoginRequiredMixin, DeleteView):
         return Project.objects.all()
 
 
-class AddCommentView(CreateView):
+class AddCommentView(LoginRequiredMixin, CreateView):
     model = Comment
+    form_class = CommentsForm
     template_name = 'addcomment.html'
-    success_url =reverse_lazy('findpost')
-    fields = '__all__'
+
+
+def CommentPost(request, pk):
+    project = get_object_or_404(Project)
+    comments = project.comments.filter(id = pk)
+    comment = None
+
+    if request.method == 'POST':
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            comment= form.save(commit=False)
+            comment.project = project
+            comment.save()
+            return redirect('index')
+
+    else:
+        form = CommentsForm()
+    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'project':project})
+
+    # form= CommentsForm
+    # def form_valid(self, form):
+    #     form.instance.name = self.request.user
+    #     return super().form_valid(form)
+
+    # def commentpost(self, request, id, *args, **kwargs):
+    #     form = CommentsForm(request.POST)
+    #     if form.is_valid():
+    #         project = self.get_object(id=id)
+    #         form.instance.user = request.user
+    #         form.instance.project = project
+    #         form.save(commit=False)
+
+    #         return redirect("addcomment", kwargs={"form":form})
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["form"] = self.form
+    #     return context
+    # def get_success_url(self):
+    #     return reverse('findpost')
 
     # def projectpost(self, request, *args, **kwargs):
     #     form = CommentsForm(request.POST)
@@ -230,7 +269,4 @@ class AddCommentView(CreateView):
 
     # def get_queryset(self):
         
-    #     return Comment.objects.all()
-
-
-
+    # return Comment.objects.all()

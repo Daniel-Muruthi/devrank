@@ -21,9 +21,9 @@ urlpatterns=[
     path ('project/new/', CreateProjectView.as_view(), name="newerpost"),
     path('project/<int:pk>/', views.FindProjectView.as_view(), name='findpost'),
     path('project/<int:pk>/deletepost/', DeleteProject.as_view(), name='delete'),
-    path('project/new/<int:pk>/addcomment/', AddCommentView.as_view(), name='addcomment'),
-
+    path('project/<int:pk>/addcomment/', views.CommentPost, name='addcomment'),
 ]
+
 
 
 if settings.DEBUG:

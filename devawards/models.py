@@ -39,10 +39,13 @@ class Comment(models.Model):
 
     objects = models.Manager()
 
+    class Meta:
+        ordering = ("date",)
+
     def __str__(self):
         return self.user.username
     def get_absolute_url(self):
-        return reverse('addcomment', kwargs={'pk': self.pk})
+        return reverse('addcomment')
 
     @classmethod
     def show_projects(cls):

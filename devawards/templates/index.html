@@ -31,15 +31,17 @@
                     <h4 class="text-center">Comments...</h4>
                     <h5><a href="{%url 'addcomment' project.id %}" class="btn btn-success">Add Comment</a></h5>
                     {% if not project.comments.all %}
-                        No Comments Yet...<a href="{%url 'addcomment' pk=project.id %}">Add One</a>
+                        No Comments Yet...<a href="{%url 'addcomment' project.id %}">Add One</a>
                     {% else %}
                         {% for comment in project.comments.all%}
                             <strong>
                                 {{comment.user}}
                                 {{comment.date}}
                             </strong>
-                            <br>
-                            {{ comment.comment }}
+                            <div>
+                                {{ comment.comment }}
+                                <br>
+                            </div>
                         {%endfor%}
                     {%endif%}
                 </div>

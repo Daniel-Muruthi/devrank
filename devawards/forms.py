@@ -43,7 +43,7 @@ class CommentsForm(forms.ModelForm):
     comment = forms.CharField(widget=forms.Textarea(attrs={'rows':'4', 'placeholder': 'enter your comment'}))
     class Meta:
         model=Comment
-        fields=['comment']
+        fields= '__all__'
 
 class UserProfileUpdateForm(forms.ModelForm):
 
