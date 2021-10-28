@@ -8,14 +8,17 @@
             <div class="card flex-column col-sm-3 mx-1 my-2" style="height:800px;">
                 <img src="{{project.userpic.url}}" alt="projectpic" height="400px">
                 <h2 class="text-center">Title</h2>
-                <h3 class="text-center my-2">{{project.title}}</h3>
+                <h5 class="text-center my-2">{{project.title}}</h5>
                 <h2 class="text-center">Description</h2>
                 <h6>" {{project.description|truncatechars:70}}  "</h6>
-                <p class="mt-auto align-self-center">
-                    <a class="btn mt-auto btn-outline-primary" href="{%url 'findpost' project.id %}">
-                        Click to View ...
-                    </a>
-                </p>
+                <div class="d-flex justify-content-around">
+                    <p class="mt-auto">
+                        <a class="btn mt-auto btn-outline-primary" href="{%url 'findpost' project.id %}">
+                            Click to View ...
+                        </a>
+                    </p>
+                    <h5><a href="{%url 'addcomment' project.id %}" class="btn btn-success">Add Comment</a></h5>
+                </div>
                 <!-- <div class="section">
                     <div class="">
                         <form method="POST" action="">
@@ -29,7 +32,7 @@
                 </div> -->
                 <div>
                     <h4 class="text-center">Comments...</h4>
-                    <h5><a href="{%url 'addcomment' project.id %}" class="btn btn-success">Add Comment</a></h5>
+
                     {% if not project.comments.all %}
                         No Comments Yet...<a href="{%url 'addcomment' project.id %}">Add One</a>
                     {% else %}
