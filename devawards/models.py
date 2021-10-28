@@ -87,7 +87,7 @@ class Project(models.Model):
     description = models.CharField(blank=True,max_length=255)
     livelink = models.URLField()
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name="projectlikes")
 
 
     # objects = models.Manager()

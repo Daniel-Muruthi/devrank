@@ -227,6 +227,7 @@ def CommentPost(request, pk):
         form = CommentsForm(request.POST)
         if form.is_valid():
             comment= form.save(commit=False)
+            comment.user = request.user
             comment.project = project
             comment.save()
             return redirect('index')
