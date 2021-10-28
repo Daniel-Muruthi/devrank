@@ -17,7 +17,13 @@
                             Click to View ...
                         </a>
                     </p>
-                    <h5><a href="{%url 'addcomment' project.id %}" class="btn btn-success">Add Comment</a></h5>
+                    <h5><a href="{%url 'addcomment' project.pk %}" class="btn btn-success">Add Comment</a></h5>
+                    <form action="{%url 'likeproject' project.id%}" method='POST'>
+                        {%csrf_token%}
+                        <button type="submit" value="project.id", name='likeid' class="btn btn-success">
+                            <i class="fas fa-thumbs-up">{{totallikes}} Likes</i>
+                        </button>
+                    </form>
                 </div>
                 <!-- <div class="section">
                     <div class="">

@@ -89,7 +89,10 @@ class Project(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
     likes = models.ManyToManyField(User, related_name="projectlikes")
 
+ 
 
+    def totallikes(self):
+        return self.likes.count()
     # objects = models.Manager()
 
     def get_absolute_url(self):
