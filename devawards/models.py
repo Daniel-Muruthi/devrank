@@ -73,6 +73,10 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def save(self):
+        super().save()
+
+
     @classmethod
     def getProfileByName(cls, username):
         uprofile = cls.objects.filter(username=username)
@@ -88,6 +92,7 @@ class Project(models.Model):
     livelink = models.URLField()
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
     likes = models.ManyToManyField(User, related_name="projectlikes")
+    likecount = models.BigIntegerField(default='0')
 
  
 

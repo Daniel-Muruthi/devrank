@@ -29,8 +29,10 @@ def landing(request):
 @login_required(login_url='/emaillogin/')
 def  userhome(request, **kwargs):
     posts = Project.show_projects().order_by('-pub_date')
+    # id = int(request.POST.get('projectid'))
     likey= get_object_or_404(Project)
     totallikes= likey.totallikes()
+    # alllikes = likey.likes.filter(id = id)
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
         c_form = CommentsForm(request.POST)
@@ -111,14 +113,18 @@ def UserProfile(request):
     }
     return render(request, 'profile.html', context)
 
-
+@login_required
 def EditProfile(request):
     profileform = UserProfileUpdateForm(instance=request.user.userprofile)
+    pform = None
     if request.method == 'POST':
         profileform=UserProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
 
         if profileform.is_valid():
-            profileform.save(commit=False)
+            pform=profileform.save(commit=False)
+            pform.user = request.user
+            pform.profile = profileform
+            pform.save()
 
 
             return redirect('profile')
@@ -128,7 +134,8 @@ def EditProfile(request):
 
     context = {
         'user': request.user,
-        'profileform': profileform
+        'profileform': profileform, 
+        'pform':pform,
     }
     return render(request, 'profileedit.html', context)
 class FindProjectView(DetailView):

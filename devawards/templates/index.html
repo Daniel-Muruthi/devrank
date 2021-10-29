@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 {% block content %}
 {% load bootstrap5 %}
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 d-flex" style="flex-wrap:wrap !important; justify-content:space-around;">
@@ -20,8 +21,8 @@
                     <h5><a href="{%url 'addcomment' project.pk %}" class="btn btn-success">Add Comment</a></h5>
                     <form action="{%url 'likeproject' project.id%}" method='POST'>
                         {%csrf_token%}
-                        <button type="submit" value="project.id", name='likeid' class="btn btn-success">
-                            <i class="fas fa-thumbs-up">{{totallikes}} Likes</i>
+                        <button type="submit" value="project.id", id="likebutton" name='likeid' class="btn btn-success">
+                            <i class="fas fa-thumbs-up">{{project.likecount}} Likes</i>
                         </button>
                     </form>
                 </div>
@@ -38,19 +39,27 @@
                 </div> -->
                 <div>
                     <h4 class="text-center">Comments...</h4>
-
+                    <hr>
                     {% if not project.comments.all %}
                         No Comments Yet...<a href="{%url 'addcomment' project.id %}">Add One</a>
                     {% else %}
                         {% for comment in project.comments.all%}
-                            <strong>
-                                {{comment.user}}
-                                {{comment.date}}
-                            </strong>
+                        <div class="d-flex">
                             <div>
-                                {{ comment.comment }}
-                                <br>
+                                <img src="{{user.userprofile.userpic.url}}" class="avatar" alt="Avatar" style="height:50px; width:50px; border-radius: 50%;">
                             </div>
+                            <div>
+                                <strong>
+                                    {{comment.user}}
+                                    {{comment.date}}
+                                </strong>
+                                <div>
+                                    {{ comment.comment }}
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                         {%endfor%}
                     {%endif%}
                 </div>
@@ -61,3 +70,25 @@
 </div>
 
 {% endblock %}
+
+<script>
+    $(document.on('click', '#likebutton', function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url: '{% url "likeproject" % }',
+            data: {
+                projectid:$('#likebutton').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                action:'post'
+            },
+            success: function(json){
+                document.getElementById("likecount").innerHTML=json['result'] 
+                console.log(json)          
+            },
+            error: function(xhr, errmsg, err){
+
+            }
+        })
+    }))
+</script>
