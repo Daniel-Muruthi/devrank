@@ -242,7 +242,7 @@ def CommentPost(request, pk):
 
     else:
         form = CommentsForm()
-    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'project':project})
+    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'project':project, 'id':pk})
 
 def LikeView(request, pk):
     project = get_object_or_404(Project, id=request.POST.get('likeid'))

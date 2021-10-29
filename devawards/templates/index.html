@@ -20,13 +20,13 @@
     <div class="row">
         <div class="col-sm-12 d-flex" style="flex-wrap:wrap !important; justify-content:space-around;">
             {% for project in posts %}
-            <div class="card flex-column col-sm-3 mx-1 my-2" style="height:800px;">
+            <div class="card d-flex flex-column col-sm-3 mx-1 my-2" style="height:800px;">
                 <img src="{{project.userpic.url}}" alt="projectpic" height="400px">
                 <h2 class="text-center">Title</h2>
                 <h5 class="text-center my-2">{{project.title}}</h5>
                 <h2 class="text-center">Description</h2>
                 <h6>" {{project.description|truncatechars:70}}  "</h6>
-                <div class="d-flex justify-content-around">
+                <div class="d-flex justify-content-around mt-auto">
                     <p class="mt-auto">
                         <a class="btn mt-auto btn-outline-primary" href="{%url 'findpost' project.id %}">
                             Click to View ...
@@ -51,7 +51,7 @@
                         </form>
                     </div>
                 </div> -->
-                <div>
+                <!-- <div>
                     <h4 class="text-center">Comments...</h4>
                     <hr>
                     {% if not project.comments.all %}
@@ -80,7 +80,7 @@
                         <hr>
                         {%endfor%}
                     {%endif%}
-                </div>
+                </div> -->
             </div>
             {% endfor %}
         </div>
