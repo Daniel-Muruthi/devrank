@@ -1,4 +1,18 @@
 {% extends 'base.html'%}
+
+{%block head%}
+<style>
+    .scroll {
+        margin:4px, 4px;
+        padding:4px;
+        background-color: green;
+        height: 110px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align:justify;
+    }
+</style>
+{% endblock %}
 {% block content %}
 {% load bootstrap5 %}
 
@@ -44,7 +58,11 @@
                         No Comments Yet...<a href="{%url 'addcomment' project.id %}">Add One</a>
                     {% else %}
                         {% for comment in project.comments.all%}
-                        <div class="d-flex">
+                        <div class="d-flex scroll" style=" background-color: rgba(9, 134, 9, 0.5);
+                        height: fit-content;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        text-align:justify;">
                             <div>
                                 <img src="{{user.userprofile.userpic.url}}" class="avatar" alt="Avatar" style="height:50px; width:50px; border-radius: 50%;">
                             </div>
